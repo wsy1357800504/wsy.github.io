@@ -51,16 +51,23 @@
         .profile-card {
             padding: 30px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        .avatar {
+        .avatar-placeholder {
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #e0e7ff;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c3cfe2 100%);
             margin: 0 auto 20px;
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #4c6ef5;
+            border: 5px solid #e0e7ff;
         }
         
         .name {
@@ -116,6 +123,28 @@
         .info-value {
             color: #2d3748;
             flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-btn {
+            background: #e0e7ff;
+            border: none;
+            color: #4c6ef5;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .copy-btn:hover {
+            background: #4c6ef5;
+            color: white;
         }
         
         .hobbies {
@@ -202,7 +231,7 @@
             font-family: monospace;
         }
         
-        .copy-btn {
+        .bank-copy-btn {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
@@ -216,15 +245,17 @@
             gap: 5px;
         }
         
-        .copy-btn:hover {
+        .bank-copy-btn:hover {
             background: rgba(255, 255, 255, 0.3);
         }
         
         .school-info {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            margin-top: 5px;
+            margin-top: 15px;
+            color: #718096;
         }
         
         .school-icon {
@@ -255,7 +286,9 @@
     <div class="container">
         <!-- 个人信息卡片 -->
         <div class="card profile-card">
-            <img src="b_0e65bb8d648a1253345a0c83731d4d28.jpg" alt="吴思远" class="avatar">
+            <div class="avatar-placeholder">
+                <span>吴</span>
+            </div>
             <h1 class="name">吴思远</h1>
             <div class="location">
                 <span>📍</span>
@@ -272,10 +305,10 @@
             </div>
             
             <div class="contact-icons">
-                <div class="contact-icon" title="微信">💬</div>
-                <div class="contact-icon" title="QQ">🐧</div>
-                <div class="contact-icon" title="邮箱">📧</div>
-                <div class="contact-icon" title="电话">📞</div>
+                <div class="contact-icon" title="微信" data-copy="AyxInGz">💬</div>
+                <div class="contact-icon" title="QQ" data-copy="18065868">🐧</div>
+                <div class="contact-icon" title="邮箱" data-copy="wusiyuan.65868@qq.com">📧</div>
+                <div class="contact-icon" title="电话" data-copy="15160487503">📞</div>
             </div>
         </div>
         
@@ -303,26 +336,50 @@
                 <div class="info-value">莆田中山中学绶溪校区</div>
             </div>
             
-            <div class="info-item">
-                <div class="info-label">手机号</div>
-                <div class="info-value">15160487503</div>
-            </div>
-            
             <h2 class="section-title">联系方式</h2>
             
             <div class="info-item">
+                <div class="info-label">手机号</div>
+                <div class="info-value">
+                    <span>15160487503</span>
+                    <button class="copy-btn" data-copy="15160487503">
+                        <span>📋</span>
+                        <span>复制</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="info-item">
                 <div class="info-label">微信</div>
-                <div class="info-value">AyxInGz</div>
+                <div class="info-value">
+                    <span>AyxInGz</span>
+                    <button class="copy-btn" data-copy="AyxInGz">
+                        <span>📋</span>
+                        <span>复制</span>
+                    </button>
+                </div>
             </div>
             
             <div class="info-item">
                 <div class="info-label">QQ</div>
-                <div class="info-value">18065868</div>
+                <div class="info-value">
+                    <span>18065868</span>
+                    <button class="copy-btn" data-copy="18065868">
+                        <span>📋</span>
+                        <span>复制</span>
+                    </button>
+                </div>
             </div>
             
             <div class="info-item">
                 <div class="info-label">邮箱</div>
-                <div class="info-value">wusiyuan.65868@qq.com</div>
+                <div class="info-value">
+                    <span>wusiyuan.65868@qq.com</span>
+                    <button class="copy-btn" data-copy="wusiyuan.65868@qq.com">
+                        <span>📋</span>
+                        <span>复制</span>
+                    </button>
+                </div>
             </div>
             
             <h2 class="section-title">兴趣爱好</h2>
@@ -340,7 +397,7 @@
                     <div class="bank-logo">🏦</div>
                 </div>
                 <div class="card-number">6222 6235 3000 2752 092</div>
-                <button class="copy-btn" id="copyBankNumber">
+                <button class="bank-copy-btn" data-copy="6222623530002752092">
                     <span>📋</span>
                     <span>复制卡号</span>
                 </button>
@@ -348,64 +405,56 @@
         </div>
     </div>
     
-    <div class="toast" id="toast">银行卡号已复制到剪贴板</div>
+    <div class="toast" id="toast">内容已复制到剪贴板</div>
 
     <script>
-        // 简单的交互效果
+        // 复制功能
         document.addEventListener('DOMContentLoaded', function() {
-            const contactIcons = document.querySelectorAll('.contact-icon');
-            const copyBtn = document.getElementById('copyBankNumber');
+            const copyButtons = document.querySelectorAll('.copy-btn, .bank-copy-btn, .contact-icon');
             const toast = document.getElementById('toast');
             
-            contactIcons.forEach(icon => {
-                icon.addEventListener('click', function() {
-                    const title = this.getAttribute('title');
-                    let message = '';
-                    
-                    switch(title) {
-                        case '微信':
-                            message = '微信号：AyxInGz';
-                            break;
-                        case 'QQ':
-                            message = 'QQ号：18065868';
-                            break;
-                        case '邮箱':
-                            message = '邮箱：wusiyuan.65868@qq.com';
-                            break;
-                        case '电话':
-                            message = '手机号：15160487503';
-                            break;
-                    }
-                    
-                    alert(message);
-                });
-            });
-            
-            // 复制银行卡号功能
-            copyBtn.addEventListener('click', function() {
-                const bankNumber = '6222623530002752092';
-                
-                // 使用现代剪贴板API
-                navigator.clipboard.writeText(bankNumber).then(() => {
-                    // 显示提示信息
-                    toast.classList.add('show');
-                    setTimeout(() => {
-                        toast.classList.remove('show');
-                    }, 2000);
+            // 统一的复制函数
+            function copyToClipboard(text, message) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(message || '内容已复制到剪贴板');
                 }).catch(err => {
                     // 备用方法
                     const textArea = document.createElement('textarea');
-                    textArea.value = bankNumber;
+                    textArea.value = text;
                     document.body.appendChild(textArea);
                     textArea.select();
                     document.execCommand('copy');
                     document.body.removeChild(textArea);
+                    showToast(message || '内容已复制到剪贴板');
+                });
+            }
+            
+            // 显示提示信息
+            function showToast(message) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+            
+            // 为所有复制按钮添加事件
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const textToCopy = this.getAttribute('data-copy');
+                    const title = this.getAttribute('title');
                     
-                    // 显示提示信息
-                    toast.classList.add('show');
-                    setTimeout(() => {
-                        toast.classList.remove('show');
-                    }, 2000);
+                    if (textToCopy) {
+                        let message = '';
+                        if (title === '微信') message = '微信号已复制';
+                        else if (title === 'QQ') message = 'QQ号已复制';
+                        else if (title === '邮箱') message = '邮箱地址已复制';
+                        else if (title === '电话') message = '手机号已复制';
+                        else if (this.classList.contains('bank-copy-btn')) message = '银行卡号已复制';
+                        else message = '内容已复制到剪贴板';
+                        
+                        copyToClipboard(textToCopy, message);
+                    }
                 });
             });
         });
